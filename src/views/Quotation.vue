@@ -6,10 +6,10 @@
         </header>
         <section>
             <dl class="car_info">
-                <dt><img :src="inquiryData.details.serial.Picture"></dt>
+                <dt><img :src="inquiryData.details && inquiryData.details.serial.Picture"></dt>
                 <dd>
-                    <h3>{{inquiryData.details.serial.AliasName}}</h3>
-                    <p>{{inquiryData.details.car_name}}</p>
+                    <h3>{{inquiryData.details && inquiryData.details.serial.AliasName}}</h3>
+                    <p>{{inquiryData.details && inquiryData.details.car_name}}</p>
                 </dd>
                 <img src="../assets/right.png">
             </dl>

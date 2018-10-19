@@ -25,8 +25,7 @@ import {mapState,mapActions,maoMutation} from 'vuex';
 export default {
     props:{
         changeList:{
-            type:Object,
-            default:{}
+            type:null
         }
     },
     computed:{

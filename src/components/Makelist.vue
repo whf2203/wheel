@@ -39,6 +39,7 @@ export default {
             touchstart(e){
                 this.offsetX = 0;
                 this.touch  = e.touches[0];
+                _hmt.push(['_trackEvent','汽车报价','tap','品牌点击'])
             },
             touchmove(e){
                 let touch = e.touches[0];

@@ -7,8 +7,8 @@
             </h1>
             <div class="priceNum">
                 <p>
-                    <span>{{detailList.market_attribute.dealer_price}}</span>
-                    <span>指导价 <i>{{detailList.market_attribute.official_refer_price}}{{detailList.market_attribute.dealer_price_max}}</i></span>
+                    <span>{{detailList.market_attribute && detailList.market_attribute.dealer_price}}</span>
+                    <span>指导价 <i>{{detailList.market_attribute && detailList.market_attribute.official_refer_price}}{{detailList.market_attribute && detailList.market_attribute.dealer_price_max}}</i></span>
                 </p>
                 <button>询问底价</button>
             </div>
