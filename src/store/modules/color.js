@@ -1,12 +1,16 @@
 import { getModelImageYearColor } from '@/api/index';
 const state = {
-    colorList: []
+    colorList: [],
+    currentName: ''
 }
 
 const mutations = {
     updateColor(state, payload) {
         state.colorList = payload;
-        console.log(payload);
+        // console.log(payload);
+    },
+    updateName(state, payload) {
+        state.currentName = payload;
     }
 }
 
@@ -15,6 +19,9 @@ const actions = {
         getModelImageYearColor(payload).then(res => {
             commit('updateColor', res.data);
         })
+    },
+    getName({ commit }, payload) {
+        commit('updateName', payload)
     }
 }
 

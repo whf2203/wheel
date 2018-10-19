@@ -10,7 +10,7 @@ const state = {
 const mutations = {
     // 城市数据
     updateCities(state, payload) {
-        // console.log(payload);
+        console.log(payload.data);
         state.cities = payload.data;
         state.isShowCity = true;
     },

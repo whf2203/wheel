@@ -3,8 +3,8 @@
         <div class="con_list" v-for="(value,key,index) in changeList" :key="index">
             <p>{{key}}</p>
             <ul v-for="(item,key) in value" :key="key">
-                <li class="tit">{{item.car_name}}</li>
-                <li class="horse_power">{{item.horse_power}}马力7档</li>
+                <li class="tit">{{item.market_attribute.year}}款 {{item.car_name}}</li>
+                <li class="horse_power">{{item.horse_power}}马力7档{{item.trans_type}}</li>
                 <li class="price">
                     <span class="refer_price">指导价 {{item.market_attribute.official_refer_price}}</span>
                     <span class="price_min">{{item.market_attribute.dealer_price_min}}起</span>

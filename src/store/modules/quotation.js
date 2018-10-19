@@ -2,8 +2,8 @@ import { getLocation, getInquiryData } from '@/api/index';
 const state = {
     inquiryData: [], // 询价数据
     cityNum: '', // 城市id
-    city: {}, // 城市数据
-    currentCity: '北京', // 当前选中城市
+    city: '北京', // 城市数据
+    currentCity: '', // 当前选中城市
     isShowCity: false // 是否显示城市菜单
 }
 const mutations = {
@@ -13,13 +13,14 @@ const mutations = {
     },
     // 询价总数据
     inquiry(state, payload) {
+        console.log(payload);
         state.inquiryData = payload;
     },
     showCity(state, payload) {
         state.isShowCity = payload;
     },
     updateCity(state, payload) {
-        state.city = payload.name;
+        state.currentCity = payload.name;
         state.isShowCity = false;
     }
 }
@@ -32,6 +33,7 @@ const actions = {
         })
     },
     getInquiryList({ commit }, payload) {
+        // console.log(payload);
         getLocation().then(res => {
             getInquiryData(payload.carId, payload.cityId || res.data.CityID).then(res => {
                 commit('inquiry', res.data);

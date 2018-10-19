@@ -11,7 +11,7 @@
                 <p>{{key}}</p>
                 <ul v-for="(item,key) in value" :key="key">
                     <li>
-                        <p class="title">
+                        <p class="title" @click="goPic($event,item.car_id)">
                             <span>{{item.market_attribute.year}}款 {{item.car_name}}</span>
                             <span>{{item.market_attribute.dealer_price_min}}起</span>
                         </p>
@@ -47,12 +47,26 @@ export default {
         }
     },
     methods:{
+        ...mapActions({
+            getDetailList:'detail/getDetailList',
+            getType:'picture/getType'
+        }),
         change(index){
             this.id=index;
+        },
+        goPic(e,id){
+            this.$router.push({
+                path:'/picture',
+                query:Object.assign(this.$route.query,{
+                    CarID:id
+                })
+            }),
+            this.getType(e.target.innerText)
         }
     },
     mounted(){
-        console.log(this.list);
+        // console.log(this.$route.query)
+        this.getDetailList(this.$route.query.SerialID);
     }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
     <div class="car-img">
         <div class="head">
-            <p @click="goColorPage"><span>颜色</span></p>
-            <router-link tag="p" to="/carType"><span>车款</span></router-link>
+            <p @click="goColorPage"><span>{{currentName ? currentName : '颜色'}}</span></p>
+            <p @click="goTypePage"><span>{{currentType ? currentType : '车款'}}</span></p>
         </div>
         <div class="list">
             <div v-for="(item,index) in typeList" :key="index">
@@ -17,7 +17,6 @@
                 </ul>
             </div>
         </div>
-        
     </div>
 </template>
 <script>
@@ -25,7 +24,9 @@ import {mapState,mapActions,mapMutations} from 'vuex';
 export default {
     computed:{
         ...mapState({
-            typeList:state=>state.picture.typeList
+            typeList:state=>state.picture.typeList,
+            currentName:state=>state.color.currentName,
+            currentType:state=>state.picture.currentType
         })
     },
     methods:{
@@ -35,9 +36,7 @@ export default {
         goColorPage(){
             this.$router.push({
                 path:'/colorType',
-                query:{
-                    SerialID:this.$route.query.SerialID
-                }
+                query:this.$route.query
             })
         },
         goImgPage(id){
@@ -48,10 +47,16 @@ export default {
                     ImageID:id
                 }
             })
+        },
+        goTypePage(){
+            this.$router.push({
+                path:'/carType',
+                query:this.$route.query
+            })
         }
     },
     mounted(){
-        this.getImageList(this.$route.query.SerialID);
+        this.getImageList(this.$route.query);
     }
 }
 </script>
@@ -118,14 +123,14 @@ export default {
             
             li{
                 width:2.46rem;
-                height:2.46rem;
-                margin-bottom:.05rem; 
+                height:2rem;
+                margin-bottom:.03rem; 
                 img{
                     width:100%;
                     height:100%;
-                    background-size:cover;
-                    background-repeat:no-repeat;
-                    background-position: center;
+                    // background-size:cover;
+                    // background-repeat:no-repeat;
+                    // background-position: center;
             }
         }
     }

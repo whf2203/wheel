@@ -13,6 +13,9 @@
                 </ul>
             </div>
         </div>
+        <div v-show="isShowLetter" class="letter">
+            <span>{{letter}}</span>
+        </div>
         <div class="letterList"
         @touchstart="touchStart"
         @touchmove="touchMove"
@@ -44,16 +47,27 @@ export default {
     computed:{
         ...mapState({
             letters:state=>state.index.letters,
-            brandObj:state=>state.index.brandList
+            brandObj:state=>state.index.brandList,
+            letter: state=>state.index.letter,
+            isShowLetter: state=>state.index.isShowLetter
         })
     },
     methods:{
+        ...mapMutations({
+            showLetter:'index/showLetter',
+            changeLetter: 'index/changeLetter'
+        }),
         ...mapActions({
             getIndex:'index/getBrandList',
             sendId:'index/getMakeList'
         }),
         touchStart(e){
-           
+           this.showLetter(true);
+                let letter = e.target.innerHTML;
+                 if (this.letter != letter){
+                    // 改变当前字母
+                    this.changeLetter(letter);
+            }
         },
         touchMove(e){
             // 计算字母下标
@@ -65,24 +79,21 @@ export default {
             }else if (index > this.letters.length-1){
                 index = this.letters.length-1;
             }
-            // 计算当前划到哪个字母
-            // let letter = this.letters[index];
-            // 计算要滚动的距离
-            //  console.log(this.$refs.menuList);
              let offsetTop = this.$refs.menuList[index].offsetTop;
             // 滚动元素到对应位置
             // 计算wrapper向下滚动的距离
              this.$refs.wrapper.scrollTop = offsetTop;
+             this.changeLetter(this.letters[index]);
         },
         touchEnd(){
-
+            this.showLetter(false);
         }
     },
     mounted(){
         this.getIndex();
-        lazyLoad('.wrapper');
     },
     updated(){
+        lazyLoad('.wrapper');
         // 获取字母列表距离顶部的高度
         this.offsetTop=this.$refs.letterList.getBoundingClientRect().top;
         // 获取每个字母的高度
@@ -145,6 +156,19 @@ export default {
             color:#666;
             line-height: .4rem;
         }
-    }
-
+}
+.letter{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: .8rem;
+        color: #fff;
+        text-align: center;
+        background: rgba(0,0,0,.8);
+        border-radius: .1rem;
+}
 </style>

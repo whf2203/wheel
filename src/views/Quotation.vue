@@ -63,7 +63,7 @@ export default {
         ...mapState({
             inquiryData:state=>state.quotation.inquiryData,
             isShowCity:state=>state.quotation.isShowCity,
-            currentCity:state=>state.quotation.city,
+            currentCity:state=>state.quotation.currentCity,
             city:state=>state.quotation.city
         })
     },

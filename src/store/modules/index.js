@@ -2,7 +2,9 @@ const state = {
         letters: [], // 品牌首字母数据
         brandList: {},
         makeList: [], // 车系列表数据
-        isShowList: false // 是否显示车系列表
+        isShowList: false, // 是否显示车系列表,
+        letter: '', // 选中的字母
+        isShowLetter: false // 是否显示字母
     }
     // 同步改变
 const mutations = {
@@ -30,6 +32,14 @@ const mutations = {
         // console.log(payload);
         state.makeList = payload;
         state.isShowList = true;
+    },
+    // 控制字母的显示和隐藏
+    showLetter: (state, payload) => {
+        state.isShowLetter = payload;
+    },
+    // 该变letter
+    changeLetter: (state, payload) => {
+        state.letter = payload;
     },
     // 隐藏车系数据
     hideMakelist: (state) => {

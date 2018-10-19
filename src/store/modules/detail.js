@@ -10,8 +10,8 @@ const mutations = {
         obj['2017'] = mergeCar(sortCar(filter(2017, payload.list)));
         obj['2018'] = mergeCar(sortCar(filter(2018, payload.list)));
         obj['全部'] = mergeCar(sortCar(payload.list));
-        // console.log(obj);
         state.list = obj;
+        console.log(obj);
         state.getDetailList = payload;
         // console.log(payload);
     }

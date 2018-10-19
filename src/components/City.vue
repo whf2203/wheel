@@ -35,12 +35,13 @@ export default {
         ...mapState({
             provinces:state=>state.city.provinces,
             cities:state=>state.city.cities,
-            isShowCity:state=>state.city.isShowCity
+            isShowCity:state=>state.city.isShowCity,
         })
     },
     methods:{
         ...mapActions({
-            getCityList:'city/getCityList'
+            getCityList:'city/getCityList',
+            getInquiryList:'quotation/getInquiryList'
         }),
         ...mapMutations({
             updateCity:'quotation/updateCity',
@@ -54,7 +55,8 @@ export default {
                 // 点到section了,关闭遮罩
                 console.log('点击关闭');
             }else if(e.target.tagName == 'LI'){
-                console.log('点击到了城市');
+                // console.log(e.target.dataset.id);
+                this.getInquiryList({carId:this.$route.query.carId,cityId:e.target.dataset.id});
                 this.updateCity({
                     name:e.target.innerText
                 })
@@ -64,6 +66,7 @@ export default {
     },
     mounted(){
         this.getCityList();
+        console.log(this.cities);
     }
 }
 </script>

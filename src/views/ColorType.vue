@@ -1,6 +1,6 @@
 <template>
     <div class="colorBox">
-        <p>全部颜色</p>
+        <p @click="changeColor">全部颜色</p>
         <div class="content">
             <p>
                 <span v-for="(item,index) in listKey" :key="index" @click="change(index)" :class="index == id ? 'active' : ''">
@@ -8,7 +8,7 @@
                 </span>
             </p>
             <ul class="color">
-                <li v-for="(value,key) in changeList" :key="key">
+                <li v-for="(value,key) in changeList" :key="key" @click="changeColor($event,value.ColorId)">
                     <span :style="`background:${value.Value}`"></span>
                     {{value.Name}}
                 </li>
@@ -39,13 +39,33 @@ export default {
     },
     methods:{
         ...mapActions({
-            getModelImageYearColor:'color/getModelImageYearColor'
+            getModelImageYearColor:'color/getModelImageYearColor',
+            getName:'color/getName'
         }),
         change(idx){
             this.id=idx;
+        },
+        changeColor(e,id){
+            if(id){
+                    this.$router.push({
+                        path:'/picture',
+                        query:Object.assign(this.$route.query,{
+                            ColorID: id
+                        })
+                });
+            }else{
+                    this.$router.push({
+                        path:'/picture',
+                        query:{
+                            SerialID:this.$route.query.SerialID
+                        }
+                });
+            }
+            this.getName(e.target.innerText);
         }
     },
     mounted(){
+        console.log(this.$route.query)
         this.getModelImageYearColor(this.$route.query.SerialID);
     }
 }

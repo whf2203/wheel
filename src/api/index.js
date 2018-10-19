@@ -67,10 +67,14 @@ export let getInquiryData = (carid, cityid) => {
  * @param id 携带参数SerialID
  * @return promise
  */
-export let getImageList = (id) => {
-    return sendRequest(`/v2-car-getImageList.html?SerialID=${id}`);
+export let getImageList = (param) => {
+    let search = ``;
+    for (let k in param) {
+        search += `&${k}=${param[k]}`;
+    }
+    console.log(search.slice(1, search.length))
+    return sendRequest(`/v2-car-getImageList.html?${search.slice(1,search.length)}`);
 }
-
 
 
 /**
